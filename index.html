@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>123</div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/localforage/1.9.0/localforage.min.js"></script>
+    <script type="module">
+      import {initSync} from "./packages/core/pkg/core.js";
+      // import wasm from './packages/core/pkg/core_bg.wasm';
+    
+      console.log(performance.now());
+      const getInstance = async () => {
+        let buf = await localforage.getItem('wasm');
+        console.log(buf,'@@');
+        if(!buf) {
+            const rep = await fetch('./packages/core/pkg/core_bg.wasm');
+            buf = await rep.arrayBuffer();
+        };
+        
+        const module = await WebAssembly.compile(buf);
+        const ctx = initSync(module,{});
+        return ctx;
+      }
+
+      const ctx = await getInstance();
+      ctx.greet();
+
+
+    //   fetch('./packages/core/pkg/core_bg.wasm').then(async res => {
+    //     const buf = await res.arrayBuffer();
+    //     const module = await WebAssembly.compile(buf);
+    //     console.log(buf);
+    //     await localforage.setItem('wasm',buf);
+    //     let instance = {};
+    //     const ctx = initSync(module,instance);
+    //     ctx.greet()
+    //     console.log(ctx,'@');
+    //   });
+    
+    </script>
+  </body>
+</html>

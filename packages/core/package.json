@@ -1,0 +1,24 @@
+{
+    "name": "@renderer/core",
+    "type": "module",
+    "scripts": {
+        "build": "wasm-pack build --target web",
+        "test": "wasm-pack test"
+    },
+    "collaborators": [
+      "zrp"
+    ],
+    "version": "0.1.0",
+    "main": "./pkg/core.js",
+    "module": "./pkg/core.js",
+    "exports":{
+      ".":{
+        "import":"./pkg/core.js"
+      },
+      "./wasm":{
+        "import":"./pkg/core_bg.wasm",
+        "require":"./pkg/core_bg.wasm"
+      }
+    },
+    "types": "./pkg/core.d.ts"
+  }

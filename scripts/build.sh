@@ -1,0 +1,1 @@
+cd packages/core && wasm-pack build --target web"

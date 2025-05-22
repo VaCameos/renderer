@@ -1,0 +1,20 @@
+{
+  "name": "@renderer/entry",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.mjs",
+  "scripts": {
+    "build": "vite build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@renderer/core": "workspace:*",
+    "localforage": "^1.10.0"
+  },
+  "devDependencies": {
+    "vite-plugin-wasm": "^3.4.1"
+  }
+}
